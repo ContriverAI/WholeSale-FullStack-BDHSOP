@@ -15,7 +15,7 @@ router.post("/create-item", userAuth, async (req, res) => {
   try {
     const user = await userModel.findById(req.userId);
     if (!user) {
-      return res.status(400).send({
+      return res.send({
         message: "Something went wrong, please try again.",
         success: false,
       });
@@ -25,12 +25,12 @@ router.post("/create-item", userAuth, async (req, res) => {
     user.products.unshift(newItem);
     newItem.save();
     user.save();
-    return res.status(400).send({
+    return res.send({
       message: "Item created",
       success: true,
     });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });
@@ -43,13 +43,13 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     const existingItem = await itemModel.findById(id);
     const admin = await adminModel.findById(req.adminId);
     if (!admin) {
-      return res.status(400).send({
+      return res.send({
         message: "Something went wrong, please try again.",
         success: false,
       });
     }
     if (!existingItem) {
-      return res.status(400).send({
+      return res.send({
         message: "Item doesn't exist.",
         success: false,
       });
@@ -57,12 +57,12 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     existingItem.status = req.body.status;
     existingItem.approvedBy = admin;
     await existingItem.save();
-    return res.status(400).send({
+    return res.send({
       message: "Item updated.",
       success: true,
     });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });

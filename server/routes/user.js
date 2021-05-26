@@ -10,7 +10,7 @@ router.post("/user-sign-up", async (req, res) => {
   try {
     const userExist = await userModel.findOne({ email: req.body.email });
     if (userExist) {
-      return res.status(400).send({
+      return res.send({
         message: "Email already exist.",
         success: false,
       });
@@ -23,11 +23,9 @@ router.post("/user-sign-up", async (req, res) => {
     const token = jwt.sign({ id }, "TESTKEY", {
       algorithm: "HS256",
     });
-    return res
-      .status(201)
-      .send({ token: token, user: response, success: true });
+    return res.send({ token: token, user: response, success: true });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });
@@ -37,14 +35,14 @@ router.post("/user-sign-up", async (req, res) => {
 router.post("/user-sign-in", async (req, res) => {
   try {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send({
+      return res.send({
         message: "Email or password can't be empty.",
         success: false,
       });
     }
     const userExist = await userModel.findOne({ email: req.body.email });
     if (!userExist) {
-      return res.status(400).send({
+      return res.send({
         message: "Account doesn't exist.",
         success: false,
       });
@@ -54,7 +52,7 @@ router.post("/user-sign-in", async (req, res) => {
       userExist.password
     );
     if (!validPassword) {
-      return res.status(400).send({
+      return res.send({
         message: "Wrong credentials.",
         success: false,
       });
@@ -63,11 +61,9 @@ router.post("/user-sign-in", async (req, res) => {
     const token = jwt.sign({ id }, "TESTKEY", {
       algorithm: "HS256",
     });
-    return res
-      .status(201)
-      .send({ token: token, user: userExist, success: true });
+    return res.send({ token: token, user: userExist, success: true });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });
@@ -80,17 +76,17 @@ router.get("/items", userAuth, async (req, res) => {
       .findById(req.userId, { _id: 1 })
       .populate("products");
     if (!user) {
-      return res.status(400).send({
+      return res.send({
         message: "Something went wrong, please try again",
         success: false,
       });
     }
-    return res.status(200).send({
+    return res.send({
       data: user,
       success: true,
     });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });

@@ -11,7 +11,7 @@ router.post("/admin-sign-up", async (req, res) => {
   try {
     const adminExist = await adminModel.findOne({ email: req.body.email });
     if (adminExist) {
-      return res.status(400).send({
+      return res.send({
         message: "Email already exist.",
         success: false,
       });
@@ -24,11 +24,9 @@ router.post("/admin-sign-up", async (req, res) => {
     const token = jwt.sign({ id }, "TESTKEY", {
       algorithm: "HS256",
     });
-    return res
-      .status(201)
-      .send({ token: token, admin: response, success: true });
+    return res.send({ token: token, admin: response, success: true });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });
@@ -38,14 +36,14 @@ router.post("/admin-sign-up", async (req, res) => {
 router.post("/admin-sign-in", async (req, res) => {
   try {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send({
+      return res.send({
         message: "Email or password can't be empty.",
         success: false,
       });
     }
     const adminExist = await adminModel.findOne({ email: req.body.email });
     if (!adminExist) {
-      return res.status(400).send({
+      return res.send({
         message: "Account doesn't exist.",
         success: false,
       });
@@ -55,7 +53,7 @@ router.post("/admin-sign-in", async (req, res) => {
       adminExist.password
     );
     if (!validPassword) {
-      return res.status(400).send({
+      return res.send({
         message: "Wrong credentials.",
         success: false,
       });
@@ -64,11 +62,9 @@ router.post("/admin-sign-in", async (req, res) => {
     const token = jwt.sign({ id }, "TESTKEY", {
       algorithm: "HS256",
     });
-    return res
-      .status(201)
-      .send({ token: token, admin: adminExist, success: true });
+    return res.send({ token: token, admin: adminExist, success: true });
   } catch (err) {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });
@@ -79,17 +75,17 @@ router.get("/items", adminAuth, async (req, res) => {
   try {
     const items = await itemModel.find({});
     if (!items) {
-      return res.status(400).send({
+      return res.send({
         message: "Something went wrong, please try again",
         success: false,
       });
     }
-    return res.status(400).send({
+    return res.send({
       data: items,
       success: true,
     });
   } catch {
-    return res.status(400).send({
+    return res.send({
       message: err.message,
       success: false,
     });
