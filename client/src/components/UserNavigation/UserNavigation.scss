@@ -20,7 +20,11 @@
         color: $primary;
         font-size: 14px;
         text-decoration: none;
-        margin-right: 12px;
+        margin-right: 1rem;
+        padding: 6px;
+      }
+      .active {
+        border-bottom: 2px solid $primary;
       }
       button {
         background-color: $primary;
@@ -133,6 +137,9 @@
       text-decoration: none;
       margin-right: 12px;
     }
+    .active {
+      border-bottom: 2px solid $primary;
+    }
     button {
       background-color: $light;
       color: $primary;
@@ -170,6 +177,9 @@
       font-size: 14px;
       text-decoration: none;
       margin-right: 12px;
+    }
+    .active {
+      border-bottom: 2px solid $primary;
     }
     button {
       background-color: $light;

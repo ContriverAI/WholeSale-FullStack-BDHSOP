@@ -1,0 +1,124 @@
+@import "../../../index.scss";
+.UserProducts {
+  width: 100%;
+  padding: 1rem;
+  h1 {
+    font-weight: 500;
+    font-size: 2rem;
+    color: $primary;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    color: $dark;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .TabContainer {
+    width: 60%;
+    margin: auto;
+    .TabHead {
+      display: flex;
+      align-items: center;
+      position: relative;
+      .Button {
+        margin: auto;
+        padding: 8px;
+        width: 25%;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.5s ease-in-out;
+        &:hover {
+          &:nth-child(1) {
+            background: linear-gradient(360deg, #0091ff31, transparent);
+          }
+          &:nth-child(2) {
+            background: linear-gradient(360deg, #00d84831, transparent);
+          }
+          &:nth-child(3) {
+            background: linear-gradient(360deg, #ff515131, transparent);
+          }
+          &:nth-child(4) {
+            background: linear-gradient(360deg, #d3be0031, transparent);
+          }
+        }
+      }
+      .Line {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 4px;
+        border-radius: 15px;
+        // background-color: $secondary;
+        transition: 0.5s ease-in-out;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .UserProducts {
+    width: 100%;
+    padding: 12px;
+    h1 {
+      font-weight: 500;
+      font-size: 24px;
+      color: $primary;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    p {
+      color: $dark;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .TabContainer {
+      width: 90%;
+      margin: auto;
+      .TabHead {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        overflow: scroll;
+        flex-wrap: nowrap;
+        .Button {
+          min-width: 108px;
+          margin: auto;
+          padding: 8px;
+          text-align: center;
+          cursor: pointer;
+          transition: 0.5s ease-in-out;
+          font-size: 14px;
+          &:hover {
+            &:nth-child(1) {
+              background: linear-gradient(360deg, #0091ff31, transparent);
+            }
+            &:nth-child(2) {
+              background: linear-gradient(360deg, #00d84831, transparent);
+            }
+            &:nth-child(3) {
+              background: linear-gradient(360deg, #ff515131, transparent);
+            }
+            &:nth-child(4) {
+              background: linear-gradient(360deg, #d3be0031, transparent);
+            }
+          }
+        }
+        .Line {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 4px;
+          border-radius: 15px;
+          // background-color: $secondary;
+          transition: 0.5s ease-in-out;
+        }
+      }
+    }
+  }
+}

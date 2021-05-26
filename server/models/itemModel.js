@@ -16,7 +16,7 @@ const itemSchema = new mongoose.Schema({
   instruction: String,
   status: {
     type: String,
-    default: "submitted",
+    default: "pending",
   },
   date: {
     type: Date,

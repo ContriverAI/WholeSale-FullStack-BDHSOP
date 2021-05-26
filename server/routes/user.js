@@ -8,6 +8,12 @@ const userAuth = require("../middleware/userAuth");
 
 router.post("/user-sign-up", async (req, res) => {
   try {
+    if (!req.body.email || !req.body.password || !req.body.userName) {
+      return res.send({
+        message: "Basic data is required.",
+        success: false,
+      });
+    }
     const userExist = await userModel.findOne({ email: req.body.email });
     if (userExist) {
       return res.send({

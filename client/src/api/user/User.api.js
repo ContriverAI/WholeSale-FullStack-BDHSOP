@@ -29,4 +29,30 @@ const userSignUp = async (data) => {
   return await axios(config);
 };
 
-export { userSignIn, userSignUp };
+const createNewProductRequest = async (data) => {
+  var config = {
+    method: "post",
+    url: `${baseURL}/item/create-item`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshop")}`,
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return await axios(config);
+};
+
+const getUsersProducts = async () => {
+  var config = {
+    method: "get",
+    url: `${baseURL}/user/items`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshop")}`,
+    },
+  };
+
+  return await axios(config);
+};
+
+export { userSignIn, userSignUp, createNewProductRequest, getUsersProducts };

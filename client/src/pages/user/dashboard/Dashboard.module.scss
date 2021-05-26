@@ -26,6 +26,15 @@
       img {
         width: 100%;
       }
+      button {
+        border: none;
+        outline: none;
+        background-color: $secondary;
+        color: $primary;
+        padding: 8px 12px;
+        font-size: 18px;
+        border-radius: 4px;
+      }
     }
     .Right {
       width: 75%;

@@ -29,13 +29,13 @@ function UserNavigation() {
           </div>
         </div>
         <div className={`${toggle ? "Links" : "LinkActive"}`}>
-          <Link className={"a"} to="/">
+          <Link activeClassName="active" className={"a"} to="/products" exact>
             Your products
           </Link>
-          <Link className={"a"} to="/">
+          <Link activeClassName="active" className={"a"} to="/home" exact>
             Contact us
           </Link>
-          <Link className={"a"} to="/">
+          <Link activeClassName="active" className={"a"} to="/home" exact>
             Cart
           </Link>
           <button onClick={logOutFunction}>LOG OUT</button>
