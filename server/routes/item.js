@@ -68,4 +68,43 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     });
   }
 });
+
+router.post("/delete-item/:id", userAuth, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await userModel.findById(req.userId);
+    const existItem = await itemModel.findById(id);
+    if (!existItem) {
+      return res.send({
+        message: "Item doesn't exist.",
+        success: false,
+      });
+    }
+    if (user._id.toString() !== existItem.clientID.toString()) {
+      return res.send({ message: "Not Authorized", success: false });
+    }
+
+    if (!Boolean(user.products.find((item) => item.toString() === id))) {
+      return res
+        .status(404)
+        .send({ message: "Item Doesn't Exist", success: false });
+    }
+
+    const removeItemIndex = user.products
+      .map((item) => item.toString())
+      .indexOf(id);
+    console.log(removeItemIndex);
+    console.log(user.products.find((item) => item.toString() === id));
+    user.products.splice(removeItemIndex, 1);
+
+    await user.save();
+    await itemModel.findByIdAndDelete(id);
+    return res.send({ message: "Item deleted", success: true });
+  } catch (err) {
+    res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
 module.exports = router;

@@ -1,15 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Styles from "./UserSignIn.module.scss";
-import { userSignIn } from "../../api/user/User.api";
-import { useToasts } from "react-toast-notifications";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import Styles from "./AdminSignIn.module.scss";
+// import { useToasts } from "react-toast-notifications";
+// import { useDispatch } from "react-redux";
 
-function UserSignIn({ onSwitch }) {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { addToast } = useToasts();
+function AdminSignIn({ onSwitch }) {
+  // const dispatch = useDispatch();
+  // const { addToast } = useToasts();
   const variants = {
     visible: { y: 0, opacity: 1 },
     hidden: { y: -120, opacity: 0 },
@@ -20,33 +17,27 @@ function UserSignIn({ onSwitch }) {
     password: "",
   });
 
-  const [togglePwd, setTogglePwd] = React.useState(true);
-
   const onInputChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const SignIn = async () => {
     try {
-      const resp = await userSignIn(data);
-      console.log(resp);
-      !resp.data.success &&
-        addToast(resp.data.message, {
-          appearance: "error",
-          autoDismiss: true,
-        });
-      if (resp.data.success) {
-        dispatch({ type: "LOGGED-IN", payload: resp.data.token });
-        localStorage.setItem("BDshop", resp.data.token);
-        history.push("/home");
-      }
+      //   const resp = await userSignIn(data);
+      //   console.log(resp);
+      //   !resp.data.success &&
+      //     addToast(resp.data.message, {
+      //       appearance: "error",
+      //       autoDismiss: true,
+      //     });
+      //   if (resp.data.success) {
+      //     dispatch({ type: "LOGGED-IN", payload: resp.data.token });
+      //   }
     } catch (err) {
       console.log(err.message);
     }
   };
-  React.useEffect(() => {
-    localStorage.getItem("BDshop") && history.push("/home");
-  }, []);
+
   return (
     <>
       <motion.div
@@ -54,7 +45,7 @@ function UserSignIn({ onSwitch }) {
         animate="visible"
         variants={variants}
         transition={{ duration: 1 }}
-        className={Styles.UserSignIn_Container}
+        className={Styles.AdminSignIn_Container}
       >
         <p>
           Doesn't have an account ? <span onClick={onSwitch}>Sign up</span>
@@ -74,14 +65,7 @@ function UserSignIn({ onSwitch }) {
           </div>
         </label>
         <label>
-          Password{" "}
-          <span onClick={() => setTogglePwd(!togglePwd)}>
-            {togglePwd ? (
-              <i class="fa fa-eye-slash" aria-hidden="true"></i>
-            ) : (
-              <i class="fa fa-eye" aria-hidden="true"></i>
-            )}
-          </span>
+          Password
           <div className={Styles.Input}>
             <span>
               <i class="fa fa-lock" aria-hidden="true"></i>
@@ -91,7 +75,6 @@ function UserSignIn({ onSwitch }) {
               value={data.password}
               name="password"
               onChange={onInputChange}
-              type={togglePwd ? "password" : "text"}
             />
           </div>
         </label>
@@ -101,4 +84,4 @@ function UserSignIn({ onSwitch }) {
   );
 }
 
-export default UserSignIn;
+export default AdminSignIn;

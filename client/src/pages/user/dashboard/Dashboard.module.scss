@@ -1,0 +1,251 @@
+@import "../../../index.scss";
+.Dashboard_Container {
+  width: 100%;
+  padding: 1rem;
+  h1 {
+    font-weight: 500;
+    font-size: 2rem;
+    color: $primary;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    color: $dark;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .Form {
+    padding: 1rem;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    .Left {
+      width: 25%;
+      padding: 1rem;
+      img {
+        width: 100%;
+      }
+    }
+    .Right {
+      width: 75%;
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      // justify-content: space-between;
+      .RowFull {
+        width: 100%;
+        button {
+          background-color: $secondary;
+          color: $primary;
+          border: none;
+          outline: none;
+          padding: 8px 12px;
+          margin-bottom: 12px;
+          border-radius: 4px;
+        }
+        label {
+          display: flex;
+          flex-direction: column;
+          font-size: 16px;
+          color: $primary;
+          input,
+          textarea {
+            width: 100%;
+
+            border: 1px solid $secondary;
+            outline: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: $primary;
+            margin-bottom: 12px;
+            &::placeholder {
+              color: $secondary;
+            }
+          }
+        }
+      }
+      .RowHalf {
+        width: 48%;
+        margin-right: auto;
+        button {
+          background-color: $secondary;
+          color: $primary;
+          border: none;
+          outline: none;
+          padding: 8px 12px;
+          border-radius: 4px;
+          margin-bottom: 12px;
+        }
+        label {
+          display: flex;
+          flex-direction: column;
+          font-size: 16px;
+          color: $primary;
+          position: relative;
+          button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            color: $secondary;
+            border: none;
+            outline: none;
+            background-color: white;
+          }
+          input,
+          textarea {
+            width: 100%;
+
+            border: 1px solid $secondary;
+            outline: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: $primary;
+            margin-bottom: 12px;
+
+            &::placeholder {
+              color: $secondary;
+            }
+          }
+        }
+      }
+      .Tags {
+        background-color: $primary;
+        color: $secondary;
+        padding: 6px 10px;
+        margin-right: 8px;
+        font-size: 12px;
+        border-radius: 4px;
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .Dashboard_Container {
+    .Form {
+      width: 90%;
+    }
+  }
+}
+@media only screen and (max-width: 426px) {
+  .Dashboard_Container {
+    h1 {
+      font-size: 24px;
+    }
+
+    .Form {
+      width: 100%;
+      flex-direction: column;
+      padding: 0;
+      .Left {
+        width: 100%;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 70%;
+          margin: auto;
+        }
+      }
+      .Right {
+        width: 100%;
+
+        .RowFull {
+          width: 100%;
+          button {
+            background-color: $secondary;
+            color: $primary;
+            border: none;
+            outline: none;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+          }
+          label {
+            display: flex;
+            flex-direction: column;
+            font-size: 16px;
+            color: $primary;
+            input,
+            textarea {
+              width: 100%;
+
+              border: 1px solid $secondary;
+              outline: none;
+              padding: 8px 12px;
+              border-radius: 4px;
+              color: $primary;
+              margin-bottom: 12px;
+              &::placeholder {
+                color: $secondary;
+              }
+            }
+          }
+        }
+        .RowHalf {
+          width: 100%;
+          margin-right: auto;
+          button {
+            background-color: $secondary;
+            color: $primary;
+            border: none;
+            outline: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+          }
+          label {
+            display: flex;
+            flex-direction: column;
+            font-size: 16px;
+            color: $primary;
+            position: relative;
+            button {
+              position: absolute;
+              right: 1rem;
+              top: 0%;
+              color: $secondary;
+              border: none;
+              outline: none;
+              background-color: white;
+              margin: 0px 0px 0px 0px !important;
+              background-color: $dark;
+            }
+            input,
+            textarea {
+              width: 100%;
+
+              border: 1px solid $secondary;
+              outline: none;
+              padding: 8px 12px;
+              border-radius: 4px;
+              color: $primary;
+              margin-bottom: 12px;
+
+              &::placeholder {
+                color: $secondary;
+              }
+            }
+          }
+        }
+        .Tags {
+          background-color: $primary;
+          color: $secondary;
+          padding: 6px 10px;
+          margin-right: 8px;
+          font-size: 12px;
+          border-radius: 4px;
+          span {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+}

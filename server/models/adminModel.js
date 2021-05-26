@@ -12,6 +12,11 @@ const adminSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  address: [
+    {
+      type: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("admins", adminSchema);

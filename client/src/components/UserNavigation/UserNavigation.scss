@@ -1,0 +1,189 @@
+@import "../../index.scss";
+@media only screen and (min-width: 480px) {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: $secondary;
+
+    .Logo {
+      h1 {
+        color: $primary;
+      }
+      #toggle {
+        display: none;
+      }
+    }
+    .LinkActive {
+      .a {
+        color: $primary;
+        font-size: 14px;
+        text-decoration: none;
+        margin-right: 12px;
+      }
+      button {
+        background-color: $primary;
+        color: $secondary;
+        padding: 8px 12px;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 479px) {
+  nav {
+    // background-color: $secondary;
+    position: relative;
+    h1 {
+      font-size: 18px;
+      color: $primary;
+    }
+
+    .Logo {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      padding: 0 16px;
+      background-color: $secondary;
+      #toggle {
+        display: block;
+      }
+      .HamBurger {
+        width: 36px;
+        height: 36px;
+        position: relative;
+        .Bar {
+          width: 100%;
+          height: 4px;
+          border-radius: 3px;
+          background-color: $primary;
+          position: absolute;
+          transform: translateY(-50%);
+          transition: 0.5s;
+
+          &:nth-child(1) {
+            top: 20%;
+          }
+          &:nth-child(2) {
+            top: 50%;
+          }
+          &:nth-child(3) {
+            top: 80%;
+          }
+        }
+      }
+      .Active {
+        width: 36px;
+        height: 36px;
+        position: relative;
+        .Bar {
+          transition: top 0.5s, transform 0.5s, opacity 0.5s;
+          width: 100%;
+          height: 4px;
+          border-radius: 3px;
+          background-color: $primary;
+          position: absolute;
+          transform: translateY(-50%);
+          &:nth-child(1) {
+            top: 50%;
+            transform: translate(0, -50%) rotate(-45deg);
+          }
+          &:nth-child(2) {
+            display: none;
+          }
+          &:nth-child(3) {
+            top: 50%;
+            transform: translate(0, -50%) rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+  .Links {
+    position: absolute;
+    width: 70%;
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: $secondary;
+    backdrop-filter: blur(2px);
+    transition: 0.5s ease-in;
+    left: 0%;
+    z-index: 11;
+    // &::after {
+    //   position: absolute;
+    //   width: 100vw;
+    //   z-index: 0;
+    //   height: calc(100vh - 60px);
+    //   top: 0;
+    //   left: 0;
+    //   background-color: rgba(255, 0, 0, 0.308);
+    //   content: "";
+    // }
+    .a {
+      color: $primary;
+      font-size: 14px;
+      text-decoration: none;
+      margin-right: 12px;
+    }
+    button {
+      background-color: $light;
+      color: $primary;
+      padding: 8px 12px;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+  .LinkActive {
+    position: absolute;
+    width: 70%;
+    z-index: 11;
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: $secondary;
+    backdrop-filter: blur(2px);
+    left: -100%;
+    transition: 0.5s ease-in;
+    // &::before {
+    //   position: absolute;
+    //   width: 100%;
+    //   z-index: 11;
+    //   height: calc(100vh - 60px);
+    //   top: 0;
+    //   left: 0;
+    //   background-color: $tertiary;
+    //   content: "";
+    // }
+    .a {
+      color: $primary;
+      font-size: 14px;
+      text-decoration: none;
+      margin-right: 12px;
+    }
+    button {
+      background-color: $light;
+      color: $primary;
+      padding: 8px 12px;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
