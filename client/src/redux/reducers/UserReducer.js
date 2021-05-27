@@ -2,6 +2,7 @@ const initState = {
   userToken: "",
   userLoggedIn: false,
   items: [],
+  cart: [],
 };
 const UserReducer = (state = initState, action) => {
   switch (action.type) {
@@ -21,6 +22,18 @@ const UserReducer = (state = initState, action) => {
       return {
         ...state,
         items: [action.payload],
+      };
+    case "ADD-TO-CART":
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+    case "REMOVE-FROM-CART":
+      return {
+        ...state,
+        cart: state.cart.filter(
+          (item) => item._id.toString() !== action.payload.toString()
+        ),
       };
     default:
       return state;

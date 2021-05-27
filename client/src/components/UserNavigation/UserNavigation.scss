@@ -20,8 +20,16 @@
         color: $primary;
         font-size: 14px;
         text-decoration: none;
-        margin-right: 1rem;
+        margin-right: 1.5rem;
         padding: 6px;
+
+        span {
+          background-color: $primary;
+          color: $secondary;
+          padding: 6px;
+          font-size: 10px;
+          border-radius: 4px;
+        }
       }
       .active {
         border-bottom: 2px solid $primary;
@@ -33,6 +41,7 @@
         outline: none;
         border: none;
         border-radius: 4px;
+        margin-left: 1.5rem;
       }
     }
   }
@@ -137,6 +146,13 @@
       text-decoration: none;
       margin-right: 12px;
     }
+    span {
+      background-color: $primary;
+      color: $secondary;
+      padding: 6px;
+      font-size: 10px;
+      border-radius: 4px;
+    }
     .active {
       border-bottom: 2px solid $primary;
     }
@@ -177,6 +193,13 @@
       font-size: 14px;
       text-decoration: none;
       margin-right: 12px;
+    }
+    span {
+      background-color: $primary;
+      color: $secondary;
+      padding: 6px;
+      font-size: 10px;
+      border-radius: 4px;
     }
     .active {
       border-bottom: 2px solid $primary;

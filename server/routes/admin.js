@@ -9,6 +9,16 @@ const itemModel = require("../models/itemModel");
 
 router.post("/admin-sign-up", async (req, res) => {
   try {
+    if (
+      !req.body.email.trim() ||
+      !req.body.password.trim() ||
+      !req.body.userName.trim()
+    ) {
+      return res.send({
+        message: "Basic data is required.",
+        success: false,
+      });
+    }
     const adminExist = await adminModel.findOne({ email: req.body.email });
     if (adminExist) {
       return res.send({
@@ -35,7 +45,7 @@ router.post("/admin-sign-up", async (req, res) => {
 
 router.post("/admin-sign-in", async (req, res) => {
   try {
-    if (!req.body.email || !req.body.password) {
+    if (!req.body.email.trim() || !req.body.password.trim()) {
       return res.send({
         message: "Email or password can't be empty.",
         success: false,

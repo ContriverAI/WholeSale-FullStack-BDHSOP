@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink as Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./UserNavigation.scss";
 
 function UserNavigation() {
@@ -13,6 +13,8 @@ function UserNavigation() {
     localStorage.removeItem("BDshop");
     history.push("/");
   };
+  const cart = useSelector((state) => state.User.cart);
+
   return (
     <>
       <nav>
@@ -36,7 +38,7 @@ function UserNavigation() {
             Contact us
           </Link>
           <Link activeClassName="active" className={"a"} to="/home" exact>
-            Cart
+            Cart {cart.length > 0 && <span>{cart.length}</span>}
           </Link>
           <button onClick={logOutFunction}>LOG OUT</button>
         </div>

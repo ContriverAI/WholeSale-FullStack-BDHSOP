@@ -8,7 +8,11 @@ const userAuth = require("../middleware/userAuth");
 
 router.post("/user-sign-up", async (req, res) => {
   try {
-    if (!req.body.email || !req.body.password || !req.body.userName) {
+    if (
+      !req.body.email.trim() ||
+      !req.body.password.trim() ||
+      !req.body.userName.trim()
+    ) {
       return res.send({
         message: "Basic data is required.",
         success: false,
@@ -40,7 +44,7 @@ router.post("/user-sign-up", async (req, res) => {
 
 router.post("/user-sign-in", async (req, res) => {
   try {
-    if (!req.body.email || !req.body.password) {
+    if (!req.body.email.trim() || !req.body.password.trim()) {
       return res.send({
         message: "Email or password can't be empty.",
         success: false,
