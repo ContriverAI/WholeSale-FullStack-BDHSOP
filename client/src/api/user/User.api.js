@@ -55,4 +55,22 @@ const getUsersProducts = async () => {
   return await axios(config);
 };
 
-export { userSignIn, userSignUp, createNewProductRequest, getUsersProducts };
+const deleteProductById = async (id) => {
+  var config = {
+    method: "post",
+    url: `${baseURL}/item/delete-item/${id}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshop")}`,
+    },
+  };
+
+  return axios(config);
+};
+
+export {
+  userSignIn,
+  userSignUp,
+  createNewProductRequest,
+  getUsersProducts,
+  deleteProductById,
+};

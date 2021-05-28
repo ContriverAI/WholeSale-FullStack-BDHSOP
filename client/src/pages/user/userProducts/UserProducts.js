@@ -1,12 +1,17 @@
 import React from "react";
-import { getUsersProducts } from "../../../api/user/User.api";
+import {
+  deleteProductById,
+  getUsersProducts,
+} from "../../../api/user/User.api";
+import moment from "moment";
 import User from "../../User";
 import Styles from "./UserProducts.module.scss";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 
-function TabComponent({ data }) {
+function TabComponent({ data, getProducts }) {
+  const now = moment();
   const dispatch = useDispatch();
   const { addToast } = useToasts();
   const cart = useSelector((state) => state.User.cart);
@@ -14,6 +19,19 @@ function TabComponent({ data }) {
   const variants = {
     visible: { x: 0, opacity: 1 },
     hidden: { x: -120, opacity: 0 },
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      const resp = await deleteProductById(id);
+      console.log(resp);
+      resp.data.success &&
+        addToast("Removed from cart", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      getProducts();
+    } catch (err) {}
   };
   return (
     <motion.div
@@ -52,6 +70,13 @@ function TabComponent({ data }) {
             <div className={Styles.Desc}>
               <h4>Category</h4>
               <p>{item.category}</p>
+            </div>
+            <div className={Styles.Desc}>
+              <h4>Requested date & Time</h4>
+              <p>
+                {new Date(item.date).toISOString().slice(0, 10)} &{" "}
+                {moment(item.date).format("hh:mm a")}
+              </p>
             </div>
             <div className={Styles.Desc}>
               {item.labels.length > 0 &&
@@ -96,6 +121,14 @@ function TabComponent({ data }) {
                   ADD TO CART
                 </button>
               ))}
+            {item.status === "pending" && (
+              <button
+                onClick={() => deleteProduct(item._id)}
+                className={Styles.Remove}
+              >
+                DELETE REQUEST
+              </button>
+            )}
           </div>
         </div>
       ))}
@@ -106,20 +139,7 @@ function TabComponent({ data }) {
 function UserProducts() {
   const [tabDataSelector, setTabDataSelector] = React.useState("pending");
   const [data, setData] = React.useState([]);
-  const TabData = {
-    pending: (
-      <TabComponent data={data.filter((item) => item.status === "pending")} />
-    ),
-    approved: (
-      <TabComponent data={data.filter((item) => item.status === "approved")} />
-    ),
-    rejected: (
-      <TabComponent data={data.filter((item) => item.status === "rejected")} />
-    ),
-    expired: (
-      <TabComponent data={data.filter((item) => item.status === "expired")} />
-    ),
-  };
+
   const getProducts = async () => {
     try {
       const resp = await getUsersProducts();
@@ -150,6 +170,33 @@ function UserProducts() {
     getProducts();
     TabAnimation();
   }, []);
+
+  const TabData = {
+    pending: (
+      <TabComponent
+        data={data.filter((item) => item.status === "pending")}
+        getProducts={getProducts}
+      />
+    ),
+    approved: (
+      <TabComponent
+        data={data.filter((item) => item.status === "approved")}
+        getProducts={getProducts}
+      />
+    ),
+    rejected: (
+      <TabComponent
+        data={data.filter((item) => item.status === "rejected")}
+        getProducts={getProducts}
+      />
+    ),
+    expired: (
+      <TabComponent
+        data={data.filter((item) => item.status === "expired")}
+        getProducts={getProducts}
+      />
+    ),
+  };
 
   return (
     <User>

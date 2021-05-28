@@ -20,7 +20,7 @@ const itemSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now(),
+    default: new Date(),
   },
   paymentStatus: {
     type: Boolean,

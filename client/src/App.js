@@ -9,7 +9,7 @@ function App() {
     <>
       <ToastProvider
         autoDismiss
-        autoDismissTimeout={6000}
+        autoDismissTimeout={2000}
         placement="top-right"
       >
         <Router>

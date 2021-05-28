@@ -20,11 +20,11 @@ router.post("/create-item", userAuth, async (req, res) => {
         success: false,
       });
     }
-    const newItem = new itemModel(req.body);
+    const newItem = new itemModel({ ...req.body, date: new Date() });
     newItem.clientID = user._id;
     user.products.unshift(newItem);
-    newItem.save();
-    user.save();
+    await newItem.save();
+    await user.save();
     return res.send({
       message: "Item created",
       success: true,

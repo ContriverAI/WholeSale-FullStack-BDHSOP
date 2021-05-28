@@ -6,6 +6,7 @@ const router = express.Router();
 const userModel = require("../models/userModel");
 const userAuth = require("../middleware/userAuth");
 
+// creaing new user
 router.post("/user-sign-up", async (req, res) => {
   try {
     if (
@@ -42,6 +43,7 @@ router.post("/user-sign-up", async (req, res) => {
   }
 });
 
+// signining in existing user
 router.post("/user-sign-in", async (req, res) => {
   try {
     if (!req.body.email.trim() || !req.body.password.trim()) {
@@ -80,6 +82,7 @@ router.post("/user-sign-in", async (req, res) => {
   }
 });
 
+// getting items of users
 router.get("/items", userAuth, async (req, res) => {
   try {
     const user = await userModel
