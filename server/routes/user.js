@@ -52,7 +52,10 @@ router.post("/user-sign-in", async (req, res) => {
         success: false,
       });
     }
-    const userExist = await userModel.findOne({ email: req.body.email });
+    const userExist = await userModel.findOne(
+      { email: req.body.email },
+      { userName: 1, email: 1, password: 1 }
+    );
     if (!userExist) {
       return res.send({
         message: "Account doesn't exist.",
@@ -73,6 +76,7 @@ router.post("/user-sign-in", async (req, res) => {
     const token = jwt.sign({ id }, "TESTKEY", {
       algorithm: "HS256",
     });
+    userExist.password = "********";
     return res.send({ token: token, user: userExist, success: true });
   } catch (err) {
     return res.send({

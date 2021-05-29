@@ -1,30 +1,25 @@
 import React from "react";
 import { NavLink as Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import "./UserNavigation.scss";
+import "./AdminNavigation.scss";
 
-function UserNavigation() {
+function AdminNavigation() {
   const [toggle, setTggle] = React.useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector((state) => state.User.profile);
 
   const logOutFunction = () => {
-    dispatch({ type: "LOGGED-OUT" });
-    localStorage.removeItem("BDshopUser");
-    localStorage.removeItem("BDshopUserProfile");
-    history.push("/");
+    dispatch({ type: "ADMIN-LOGGED-OUT" });
+    localStorage.removeItem("BDshopAdmin");
+    history.push("/admin");
   };
-  const cart = useSelector((state) => state.User.cart);
+  //   const cart = useSelector((state) => state.User.cart);
 
   return (
     <>
       <nav>
         <div className={"Logo"}>
-          <div className="LogoCTR">
-            <h1>BD Shop</h1>
-            <p>Welcome, {user.userName}</p>
-          </div>
+          <h1>BD Shop</h1>
           <div
             id="toggle"
             className={`${toggle ? "Active" : "HamBurger"}`}
@@ -43,7 +38,7 @@ function UserNavigation() {
             Contact us
           </Link>
           <Link activeClassName="active" className={"a"} to="/home" exact>
-            Cart {cart.length > 0 && <span>{cart.length}</span>}
+            Cart
           </Link>
           <button onClick={logOutFunction}>LOG OUT</button>
         </div>
@@ -52,4 +47,4 @@ function UserNavigation() {
   );
 }
 
-export default UserNavigation;
+export default AdminNavigation;

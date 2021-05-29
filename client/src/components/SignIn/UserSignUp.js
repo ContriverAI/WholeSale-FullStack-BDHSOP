@@ -4,6 +4,7 @@ import Styles from "./UserSignIn.module.scss";
 import { userSignUp } from "../../api/user/User.api";
 import { useToasts } from "react-toast-notifications";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
   switch (step) {
@@ -145,6 +146,7 @@ function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
 
 function UserSignUp({ onSwitch }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { addToast } = useToasts();
   const variants = {
     visible: { y: 0, opacity: 1 },
@@ -175,7 +177,19 @@ function UserSignUp({ onSwitch }) {
           autoDismiss: true,
         });
       if (resp.data.success) {
-        dispatch({ type: "LOGGED-IN", payload: resp.data.token });
+        dispatch({
+          type: "LOGGED-IN",
+          payload: {
+            token: resp.data.token,
+            profile: resp.data.user,
+          },
+        });
+        localStorage.setItem(
+          "BDshopUserProfile",
+          JSON.stringify(resp.data.user)
+        );
+        localStorage.setItem("BDshopUser", resp.data.token);
+        history.push("/home");
       }
     } catch (err) {
       console.log(err.message);

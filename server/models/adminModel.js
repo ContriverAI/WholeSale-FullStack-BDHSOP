@@ -17,6 +17,12 @@ const adminSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  approvedItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "items",
+    },
+  ],
 });
 
 module.exports = mongoose.model("admins", adminSchema);

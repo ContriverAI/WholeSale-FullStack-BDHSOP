@@ -81,9 +81,11 @@ router.post("/admin-sign-in", async (req, res) => {
   }
 });
 
-router.get("/items", adminAuth, async (req, res) => {
+router.get("/PendingItems", adminAuth, async (req, res) => {
   try {
-    const items = await itemModel.find({});
+    const items = await itemModel
+      .find({ status: "pending" })
+      .sort({ date: -1 });
     if (!items) {
       return res.send({
         message: "Something went wrong, please try again",

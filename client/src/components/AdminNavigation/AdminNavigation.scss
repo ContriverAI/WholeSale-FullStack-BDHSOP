@@ -8,19 +8,11 @@
     background-color: $secondary;
 
     .Logo {
-      .LogoCTR {
-        display: flex;
-        align-items: center;
-        h1 {
-          color: $primary;
-        }
-        p {
-          color: $primary;
-          margin-left: 24px;
-        }
-        #toggle {
-          display: none;
-        }
+      h1 {
+        color: $primary;
+      }
+      #toggle {
+        display: none;
       }
     }
     .LinkActive {
@@ -43,8 +35,8 @@
         border-bottom: 2px solid $primary;
       }
       button {
-        background-color: $primary;
-        color: $secondary;
+        color: $primary;
+        background-color: $secondary;
         padding: 8px 12px;
         outline: none;
         border: none;
@@ -71,25 +63,8 @@
       height: 60px;
       padding: 0 16px;
       background-color: $secondary;
-      .LogoCTR {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        h1 {
-          color: $primary;
-        }
-        p {
-          color: $primary;
-          margin-left: 0px;
-        }
-      }
       #toggle {
         display: block;
-      }
-      p {
-        color: $primary;
-        margin-left: 12px;
-        font-size: 12px;
       }
       .HamBurger {
         width: 36px;
@@ -230,8 +205,8 @@
       border-bottom: 2px solid $primary;
     }
     button {
-      background-color: $light;
-      color: $primary;
+      color: $light;
+      background-color: $primary;
       padding: 8px 12px;
       outline: none;
       border: none;

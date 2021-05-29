@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Styles from "./AdminSignIn.module.scss";
-// import { useToasts } from "react-toast-notifications";
-// import { useDispatch } from "react-redux";
+import { useToasts } from "react-toast-notifications";
+import { useDispatch } from "react-redux";
+import { adminSignUp } from "../../api/admin/Admin.api";
+import { useHistory } from "react-router-dom";
 
 function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
   switch (step) {
@@ -143,8 +145,9 @@ function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
 }
 
 function AdminSignUp({ onSwitch }) {
-  // const dispatch = useDispatch();
-  // const { addToast } = useToasts();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { addToast } = useToasts();
   const variants = {
     visible: { y: 0, opacity: 1 },
     hidden: { y: -120, opacity: 0 },
@@ -165,20 +168,22 @@ function AdminSignUp({ onSwitch }) {
   };
   const [step, setStep] = React.useState(1);
   const SignUp = async () => {
-    // try {
-    //   const resp = await userSignUp(data);
-    //   console.log(resp);
-    //   !resp.data.success &&
-    //     addToast(resp.data.message, {
-    //       appearance: "error",
-    //       autoDismiss: true,
-    //     });
-    //   if (resp.data.success) {
-    //     dispatch({ type: "LOGGED-IN", payload: resp.data.token });
-    //   }
-    // } catch (err) {
-    //   console.log(err.message);
-    // }
+    try {
+      const resp = await adminSignUp(data);
+      console.log(resp);
+      !resp.data.success &&
+        addToast(resp.data.message, {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      if (resp.data.success) {
+        dispatch({ type: "ADMIN-LOGGED-IN", payload: resp.data.token });
+        localStorage.setItem("BDshopAdmin", resp.data.token);
+        history.push("/admin-dashboard");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   return (
     <>

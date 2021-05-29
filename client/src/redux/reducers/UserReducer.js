@@ -1,15 +1,28 @@
 const initState = {
   userToken: "",
   userLoggedIn: false,
+  profile: {},
   items: [],
   cart: [],
 };
 const UserReducer = (state = initState, action) => {
   switch (action.type) {
+    case "USE-EFFECT-USER":
+      return {
+        ...state,
+        userToken: localStorage.getItem("BDshopUser")
+          ? localStorage.getItem("BDshopUser")
+          : "",
+        userLoggedIn: true,
+        profile: localStorage.getItem("BDshopUserProfile")
+          ? JSON.parse(localStorage.getItem("BDshopUserProfile"))
+          : {},
+      };
     case "LOGGED-IN":
       return {
         ...state,
-        userToken: action.payload,
+        userToken: action.payload.token,
+        profile: action.payload.profile,
         userLoggedIn: true,
       };
     case "LOGGED-OUT":
@@ -17,6 +30,7 @@ const UserReducer = (state = initState, action) => {
         ...state,
         userLoggedIn: false,
         userToken: "",
+        profile: {},
       };
     case "GET-ITEMS":
       return {

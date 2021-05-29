@@ -42,6 +42,12 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     const id = req.params.itemId;
     const existingItem = await itemModel.findById(id);
     const admin = await adminModel.findById(req.adminId);
+    if (!req.body.amount.trim()) {
+      return res.send({
+        message: "Please specify amount.",
+        success: false,
+      });
+    }
     if (!admin) {
       return res.send({
         message: "Something went wrong, please try again.",
@@ -56,6 +62,9 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     }
     existingItem.status = req.body.status;
     existingItem.approvedBy = admin;
+    existingItem.amount = req.body.amount;
+    admin.approvedItems.unshift(id);
+    await admin.save();
     await existingItem.save();
     return res.send({
       message: "Item updated.",
@@ -105,6 +114,55 @@ router.post("/delete-item/:id", userAuth, async (req, res) => {
       message: err.message,
       success: false,
     });
+  }
+});
+
+router.get("/test-aggregate", async (req, res) => {
+  try {
+    const resp = await userModel.aggregate(
+      [
+        {
+          $unwind: {
+            path: "$products",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $lookup: {
+            from: "items",
+            localField: "products",
+            foreignField: "_id",
+            as: "ProductData",
+          },
+        },
+        {
+          $project: {
+            ProductData: 1.0,
+          },
+        },
+        {
+          $unwind: {
+            path: "$ProductData",
+            preserveNullAndEmptyArrays: false,
+          },
+        },
+        {
+          $lookup: {
+            from: "admins",
+            localField: "ProductData.approvedBy",
+            foreignField: "_id",
+            as: "approval",
+          },
+        },
+      ]
+      // {
+      //   allowDiskUse: false,
+      // }
+    );
+
+    return res.send(resp);
+  } catch (err) {
+    return res.send(err);
   }
 });
 module.exports = router;

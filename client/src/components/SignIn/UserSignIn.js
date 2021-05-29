@@ -36,8 +36,15 @@ function UserSignIn({ onSwitch }) {
           autoDismiss: true,
         });
       if (resp.data.success) {
-        dispatch({ type: "LOGGED-IN", payload: resp.data.token });
-        localStorage.setItem("BDshop", resp.data.token);
+        dispatch({
+          type: "LOGGED-IN",
+          payload: { token: resp.data.token, profile: resp.data.user },
+        });
+        localStorage.setItem(
+          "BDshopUserProfile",
+          JSON.stringify(resp.data.user)
+        );
+        localStorage.setItem("BDshopUser", resp.data.token);
         history.push("/home");
       }
     } catch (err) {
@@ -45,7 +52,7 @@ function UserSignIn({ onSwitch }) {
     }
   };
   React.useEffect(() => {
-    localStorage.getItem("BDshop") && history.push("/home");
+    localStorage.getItem("BDshopUser") && history.push("/home");
   }, []);
   return (
     <>

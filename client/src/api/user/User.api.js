@@ -34,7 +34,7 @@ const createNewProductRequest = async (data) => {
     method: "post",
     url: `${baseURL}/item/create-item`,
     headers: {
-      authorization: `Bearer ${localStorage.getItem("BDshop")}`,
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
       "Content-Type": "application/json",
     },
     data: data,
@@ -48,7 +48,7 @@ const getUsersProducts = async () => {
     method: "get",
     url: `${baseURL}/user/items`,
     headers: {
-      authorization: `Bearer ${localStorage.getItem("BDshop")}`,
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
     },
   };
 
@@ -60,7 +60,7 @@ const deleteProductById = async (id) => {
     method: "post",
     url: `${baseURL}/item/delete-item/${id}`,
     headers: {
-      authorization: `Bearer ${localStorage.getItem("BDshop")}`,
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
     },
   };
 
