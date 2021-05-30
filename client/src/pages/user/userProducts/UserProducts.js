@@ -26,7 +26,7 @@ function TabComponent({ data, getProducts }) {
       const resp = await deleteProductById(id);
       console.log(resp);
       resp.data.success &&
-        addToast("Removed from cart", {
+        addToast("Item deleted.", {
           appearance: "error",
           autoDismiss: true,
         });
@@ -51,7 +51,7 @@ function TabComponent({ data, getProducts }) {
               <h4>Title</h4>
               <p>{item.title}</p>
             </div>
-            {item?.amount && (
+            {item.status === "approved" && (
               <>
                 <div className={Styles.Desc}>
                   <h4>Amount</h4>
@@ -214,6 +214,9 @@ function UserProducts() {
               }}
             >
               Pending
+              <span>
+                {data.filter((item) => item.status === "pending").length}
+              </span>
             </div>
             <div
               className={Styles.Button}
@@ -224,6 +227,9 @@ function UserProducts() {
               }}
             >
               Approved
+              <span>
+                {data.filter((item) => item.status === "approved").length}
+              </span>
             </div>
             <div
               className={Styles.Button}
@@ -234,6 +240,9 @@ function UserProducts() {
               }}
             >
               Rejected
+              <span>
+                {data.filter((item) => item.status === "rejected").length}
+              </span>
             </div>
             <div
               className={Styles.Button}
@@ -244,6 +253,9 @@ function UserProducts() {
               }}
             >
               Expired
+              <span>
+                {data.filter((item) => item.status === "expired").length}
+              </span>
             </div>
             <div className={Styles.Line} ref={Line}></div>
           </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import Cart from "../../pages/user/cart/Cart";
 import Dashboard from "../../pages/user/dashboard/Dashboard";
 import Home from "../../pages/user/home/Home";
 import UserProducts from "../../pages/user/userProducts/UserProducts";
@@ -11,6 +12,7 @@ function UserRoute() {
       <Route exact path="/" component={Home}></Route>
       <UserAuthRoute exact path="/home" component={Dashboard} />
       <UserAuthRoute exact path="/products" component={UserProducts} />
+      <UserAuthRoute exact path="/cart" component={Cart} />
     </Switch>
   );
 }

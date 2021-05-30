@@ -85,6 +85,15 @@ router.get("/PendingItems", adminAuth, async (req, res) => {
   try {
     const items = await itemModel
       .find({ status: "pending" })
+      .populate("clientID", {
+        userName: 1,
+        email: 1,
+        mobile: 1,
+        accountVerified: 1,
+        address: 1,
+        state: 1,
+        country: 1,
+      })
       .sort({ date: -1 });
     if (!items) {
       return res.send({

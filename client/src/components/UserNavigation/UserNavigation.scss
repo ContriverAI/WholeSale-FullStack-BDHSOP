@@ -40,7 +40,7 @@
         }
       }
       .active {
-        border-bottom: 2px solid $primary;
+        border-bottom: 2px solid $primary !important;
       }
       button {
         background-color: $primary;
@@ -150,7 +150,7 @@
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-    background-color: $secondary;
+    background-color: $secondary !important;
     backdrop-filter: blur(2px);
     transition: 0.5s ease-in;
     left: 0%;
@@ -166,7 +166,7 @@
     //   content: "";
     // }
     .a {
-      color: $primary;
+      color: $primary !important;
       font-size: 14px;
       text-decoration: none;
       margin-right: 12px;
@@ -179,11 +179,11 @@
       border-radius: 4px;
     }
     .active {
-      border-bottom: 2px solid $primary;
+      border-bottom: 2px solid $primary !important;
     }
     button {
-      background-color: $light;
-      color: $primary;
+      background-color: $primary !important;
+      color: $secondary !important;
       padding: 8px 12px;
       outline: none;
       border: none;
@@ -227,7 +227,7 @@
       border-radius: 4px;
     }
     .active {
-      border-bottom: 2px solid $primary;
+      border-bottom: 2px solid $primary !important;
     }
     button {
       background-color: $light;

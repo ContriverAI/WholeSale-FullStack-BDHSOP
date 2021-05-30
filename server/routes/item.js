@@ -42,9 +42,9 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     const id = req.params.itemId;
     const existingItem = await itemModel.findById(id);
     const admin = await adminModel.findById(req.adminId);
-    if (!req.body.amount.trim()) {
+    if (!req.body.amount.trim() || !req.body.status.trim()) {
       return res.send({
-        message: "Please specify amount.",
+        message: "Please specify amount and status.",
         success: false,
       });
     }
@@ -62,7 +62,7 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     }
     existingItem.status = req.body.status;
     existingItem.approvedBy = admin;
-    existingItem.amount = req.body.amount;
+    if (req.body.status === "approved") existingItem.amount = req.body.amount;
     admin.approvedItems.unshift(id);
     await admin.save();
     await existingItem.save();

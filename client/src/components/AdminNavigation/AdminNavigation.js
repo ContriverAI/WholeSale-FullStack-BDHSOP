@@ -17,7 +17,7 @@ function AdminNavigation() {
 
   return (
     <>
-      <nav>
+      <nav className="Admin_Nav">
         <div className={"Logo"}>
           <h1>BD Shop</h1>
           <div
@@ -30,16 +30,21 @@ function AdminNavigation() {
             <div className={"Bar"}></div>
           </div>
         </div>
-        <div className={`${toggle ? "Links" : "LinkActive"}`}>
-          <Link activeClassName="active" className={"a"} to="/products" exact>
-            Your products
+        <div className={`${toggle ? "Links-ADMIN" : "LinkActive-ADMIN"}`}>
+          <Link
+            activeClassName="active"
+            className={"a"}
+            to="/admin-dashboard"
+            exact
+          >
+            Home
           </Link>
-          <Link activeClassName="active" className={"a"} to="/home" exact>
+          {/* <Link activeClassName="active" className={"a"} to="/home" exact>
             Contact us
           </Link>
           <Link activeClassName="active" className={"a"} to="/home" exact>
             Cart
-          </Link>
+          </Link> */}
           <button onClick={logOutFunction}>LOG OUT</button>
         </div>
       </nav>
