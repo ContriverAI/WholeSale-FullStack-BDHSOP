@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema({
   ],
   date: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   amount: Number,
   deliveryAmount: Number,
@@ -29,6 +29,12 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: "created",
   },
+});
+
+orderSchema.pre("save", function (next) {
+  now = new Date();
+  this.date = now;
+  next();
 });
 
 module.exports = mongoose.model("orders", orderSchema);

@@ -56,8 +56,32 @@ const updateItemStatus = async (data, id) => {
 const getItemById = async (id) => {
   var config = {
     method: "get",
-    url: `http://localhost:5000/api/item/item/${id}`,
+    url: `${baseURL}/item/item/${id}`,
     headers: {},
+  };
+
+  return await axios(config);
+};
+
+const getOrder = async (type) => {
+  var config = {
+    method: "get",
+    url: `${baseURL}/admin/Orders/${type}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopAdmin")}`,
+    },
+  };
+
+  return await axios(config);
+};
+
+const getOrderById = async (id) => {
+  var config = {
+    method: "get",
+    url: `${baseURL}/admin/Order/${id}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopAdmin")}`,
+    },
   };
 
   return await axios(config);
@@ -69,4 +93,6 @@ export {
   getPendingItems,
   updateItemStatus,
   getItemById,
+  getOrder,
+  getOrderById,
 };

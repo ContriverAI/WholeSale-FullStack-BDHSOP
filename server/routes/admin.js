@@ -6,6 +6,7 @@ const router = express.Router();
 const adminModel = require("../models/adminModel");
 const adminAuth = require("../middleware/adminAuth");
 const itemModel = require("../models/itemModel");
+const orderModel = require("../models/orderModel");
 
 router.post("/admin-sign-up", async (req, res) => {
   try {
@@ -105,7 +106,53 @@ router.get("/PendingItems", adminAuth, async (req, res) => {
       data: items,
       success: true,
     });
-  } catch {
+  } catch (err) {
+    return res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
+
+router.get("/Order/:id", adminAuth, async (req, res) => {
+  try {
+    const orders = await orderModel
+      .findById(req.params.id)
+      .populate("products")
+      .populate("user", {
+        accountVerified: 1,
+        email: 1,
+        userName: 1,
+        mobile: 1,
+      });
+    if (!orders) {
+      return res.send({
+        message: "Something wemt wrong, try again",
+        success: false,
+      });
+    }
+    return res.send({ orders, success: true });
+  } catch (err) {
+    return res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
+
+router.get("/Orders/:type", adminAuth, async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ status: req.params.type })
+      .sort({ date: -1 });
+    if (!orders) {
+      return res.send({
+        message: "Something wemt wrong, try again",
+        success: false,
+      });
+    }
+    return res.send({ orders, success: true });
+  } catch (err) {
     return res.send({
       message: err.message,
       success: false,

@@ -11,3 +11,33 @@ $secondary: #044389;
 $tertiary: #fcff4b;
 $dark: #212428;
 $light: #faf9f9;
+
+.MuiTableCell-head {
+  background-color: #044389 !important;
+  color: #ffad05 !important;
+  padding: 8px 12px !important;
+  white-space: nowrap !important;
+  font-size: 14px !important;
+}
+
+.MuiTableCell-body {
+  padding: 8px 12px !important;
+  white-space: nowrap !important;
+  font-size: 14px !important;
+}
+
+@media only screen and (max-width: 426px) {
+  .MuiTableCell-head {
+    background-color: #044389 !important;
+    color: #ffad05 !important;
+    padding: 8px 12px !important;
+    white-space: nowrap !important;
+    font-size: 14px !important;
+  }
+
+  .MuiTableCell-body {
+    padding: 8px 12px !important;
+    white-space: nowrap !important;
+    font-size: 12px !important;
+  }
+}

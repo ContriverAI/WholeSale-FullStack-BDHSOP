@@ -1,0 +1,116 @@
+@import "../../../index.scss";
+.ManageOrder_Container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  .mystyle {
+    left: 0px !important;
+    transition: 0.5s ease-in-out;
+  }
+  .Sidebar {
+    transition: 0.5s ease-in-out;
+    border-right: 1px solid gainsboro;
+
+    left: -120px;
+    position: fixed;
+    width: 144px;
+    height: 100vh;
+    padding: 6px;
+    background-color: white;
+    z-index: 11;
+    // &:hover {
+    //   left: 0px;
+    //   .arrow {
+    //     transform: rotateY(180deg);
+    //     transition: 0.5s ease-in-out;
+    //   }
+    // }
+    .mystyle {
+      transform: rotateY(180deg);
+      transition: 0.5s ease-in-out;
+    }
+    .arrow {
+      position: absolute;
+      right: -12px;
+      transition: 0.5s ease-in-out;
+
+      button {
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        background-color: $primary;
+        color: $secondary;
+        border: none;
+        cursor: pointer;
+      }
+    }
+    .Selector {
+      margin: 1rem 0;
+      padding: 6px;
+      width: 108px;
+      transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      border-radius: 4px;
+
+      p {
+        color: $secondary;
+        cursor: pointer;
+      }
+      &:hover {
+        background-color: #c8e2ff;
+      }
+    }
+    .Active {
+      background-color: #c8e2ff;
+    }
+  }
+  .main {
+    padding: 2rem;
+    width: 100%;
+    .OrderTab_Container {
+      width: 100%;
+      padding: 1rem;
+      h1 {
+        text-align: center;
+        color: $secondary;
+        margin-bottom: 1rem;
+      }
+      .Order_Row {
+        background-color: $secondary;
+        color: $primary;
+        padding: 4px 6px;
+        border-radius: 4px;
+        text-decoration: none;
+      }
+      .Payment_Submitted {
+        color: green;
+        background-color: rgba(0, 128, 0, 0.1);
+        padding: 4px 6px;
+        border-radius: 4px;
+      }
+      .Payment_Verification {
+        color: orange;
+        background-color: rgba(255, 166, 0, 0.1);
+        padding: 4px 6px;
+        border-radius: 4px;
+      }
+      .Payment_Rejected {
+        color: red;
+        background-color: rgba(255, 0, 0, 0.1);
+        padding: 4px 6px;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 426px) {
+  .ManageOrder_Container {
+    .main {
+      padding: 12px;
+      width: 100%;
+      .OrderTab_Container {
+        width: 100%;
+        padding: 8px;
+      }
+    }
+  }
+}
