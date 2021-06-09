@@ -6,13 +6,13 @@ const itemSchema = new mongoose.Schema({
   title: String,
   quantity: Number,
   amount: Number,
-  shop: String,
-  labels: [
-    {
-      label: String,
-      value: String,
-    },
-  ],
+  // shop: String,
+  // labels: [
+  //   {
+  //     label: String,
+  //     value: String,
+  //   },
+  // ],
   instruction: String,
   status: {
     type: String,
@@ -42,9 +42,10 @@ const itemSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  customsShipping: String,
-  shippingTime: String,
-  category: String,
+  deliveryCharges: Number,
+  shippingDays: Number,
+  deliveryDate: Date,
+  // category: String,
   clientID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",

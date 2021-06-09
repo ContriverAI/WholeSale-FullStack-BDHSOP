@@ -1,11 +1,12 @@
 @import "../../index.scss";
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 900px) {
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 16px;
     background-color: $secondary;
+    height: 60px;
 
     .Logo {
       .LogoCTR {
@@ -54,7 +55,7 @@
     }
   }
 }
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 899px) {
   nav {
     // background-color: $secondary;
     position: relative;

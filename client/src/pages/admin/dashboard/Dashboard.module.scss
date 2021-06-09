@@ -15,12 +15,15 @@
     margin-bottom: 16px;
   }
   .TabDetails {
-    width: 80%;
+    width: 50%;
     padding: 12px;
     margin: auto;
 
     .ItemRow {
       display: flex;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+      border-radius: 6px;
       .Left {
         width: 20%;
         padding: 12px;
@@ -28,40 +31,44 @@
           width: 100%;
         }
       }
-      .Right {
-        width: 40%;
-        padding: 12px 12px 0 12px;
+      // .Right {
+      //   width: 80%;
+      //   padding: 12px 12px 0 12px;
 
-        .Client {
-          display: flex;
-          flex-wrap: wrap;
-          margin-bottom: 6px;
-          h4,
-          p {
-            margin: 0;
-            padding: 0;
-            line-height: 24px;
-          }
-          h4 {
-            font-weight: 500;
-            color: $secondary;
-            font-size: 15px;
-            margin-right: 8px;
-          }
-          p {
-            color: $dark;
-            font-size: 14px;
-          }
-        }
-      }
+      //   .Client {
+      //     display: flex;
+      //     flex-wrap: wrap;
+      //     margin-bottom: 6px;
+      //     h4,
+      //     p {
+      //       margin: 0;
+      //       padding: 0;
+      //       line-height: 24px;
+      //     }
+      //     h4 {
+      //       font-weight: 500;
+      //       color: $secondary;
+      //       font-size: 15px;
+      //       margin-right: 8px;
+      //     }
+      //     p {
+      //       color: $dark;
+      //       font-size: 14px;
+      //     }
+      //   }
+      // }
       .Middle {
-        width: 40%;
+        width: 80%;
         padding: 12px 12px 0 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         .Desc {
           display: flex;
           flex-wrap: wrap;
           margin-bottom: 6px;
+          overflow: hidden;
           button {
             background-color: $primary;
             color: $secondary;
@@ -115,6 +122,13 @@
             }
           }
         }
+        .Link {
+          background-color: $primary;
+          color: $secondary;
+          width: max-content;
+          padding: 6px 12px;
+          margin-bottom: 12px;
+        }
         .Remove,
         .Add {
           border: none;
@@ -157,6 +171,25 @@
           color: $primary;
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 769px) {
+  .DashBoard {
+    .TabDetails {
+      width: 90%;
+      padding: 12px;
+      margin: auto;
+    }
+  }
+}
+@media only screen and (max-width: 426px) {
+  .DashBoard {
+    .TabDetails {
+      width: 98%;
+      padding: 8px;
+      margin: auto;
     }
   }
 }

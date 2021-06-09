@@ -59,18 +59,18 @@ function TabComponent({ data, getProducts }) {
                 </div>
               </>
             )}
-            <div className={Styles.Desc}>
+            {/* <div className={Styles.Desc}>
               <h4>Shop</h4>
               <p>{item.shop}</p>
-            </div>
+            </div> */}
             <div className={Styles.Desc}>
               <h4>Quantity</h4>
               <p>{item.quantity}</p>
             </div>
-            <div className={Styles.Desc}>
+            {/* <div className={Styles.Desc}>
               <h4>Category</h4>
               <p>{item.category}</p>
-            </div>
+            </div> */}
             <div className={Styles.Desc}>
               <h4>Requested date & Time</h4>
               <p>
@@ -78,7 +78,7 @@ function TabComponent({ data, getProducts }) {
                 {moment(item.date).format("hh:mm a")}
               </p>
             </div>
-            <div className={Styles.Desc}>
+            {/* <div className={Styles.Desc}>
               {item.labels.length > 0 &&
                 item.labels.map((tag, _) => (
                   <p key={tag._id} className={Styles.Tags}>
@@ -86,11 +86,35 @@ function TabComponent({ data, getProducts }) {
                     <span className={Styles.Value}>{tag.value}</span>
                   </p>
                 ))}
-            </div>
+            </div> */}
             <div className={Styles.Desc}>
               <h4>Instruction</h4>
               <p>{item.instruction}</p>
             </div>
+            {item?.deliveryCharges && (
+              <div className={Styles.Desc}>
+                <h4>Delivery Charges</h4>
+                <p>{item?.deliveryCharges}</p>
+              </div>
+            )}
+            {item?.shippingDays && (
+              <div className={Styles.Desc}>
+                <h4>Shipping Days</h4>
+                <p>{item?.shippingDays}</p>
+              </div>
+            )}
+            {item?.deliveryDate && (
+              <div className={Styles.Desc}>
+                <h4>Delivery Date</h4>
+                <p>{new Date(item?.deliveryDate).toLocaleDateString()}</p>
+              </div>
+            )}
+            {item?.amount !== 0 && (
+              <div className={Styles.Desc}>
+                <h4>Amount (Per Piece)</h4>
+                <p>{item.amount}</p>
+              </div>
+            )}
             {item.status === "approved" &&
               (cart
                 .map((cartItem) => cartItem._id.toString())

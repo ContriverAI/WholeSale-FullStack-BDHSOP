@@ -67,10 +67,57 @@ const deleteProductById = async (id) => {
   return axios(config);
 };
 
+const createNewOrder = async (data) => {
+  var config = {
+    method: "post",
+    url: `${baseURL}/order/new-order`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return await axios(config);
+};
+
+const getAllOrders = async () => {
+  var config = {
+    method: "get",
+    url: `${baseURL}/order/my-orders`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
+    },
+  };
+
+  return await axios(config);
+};
+
+const updatePaymentScreenshot = async (payment, id) => {
+  var data = {
+    payment: payment,
+  };
+
+  var config = {
+    method: "post",
+    url: `${baseURL}/order/update-payment/${id}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return await axios(config);
+};
+
 export {
   userSignIn,
   userSignUp,
   createNewProductRequest,
   getUsersProducts,
   deleteProductById,
+  createNewOrder,
+  getAllOrders,
+  updatePaymentScreenshot,
 };

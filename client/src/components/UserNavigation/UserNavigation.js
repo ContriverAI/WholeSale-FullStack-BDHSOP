@@ -42,9 +42,12 @@ function UserNavigation() {
           <Link activeClassName="active" className={"a"} to="/products" exact>
             Your products
           </Link>
-          <Link activeClassName="active" className={"a"} to="" exact>
-            Contact us
+          <Link activeClassName="active" className={"a"} to="/orders" exact>
+            My Orders
           </Link>
+          {/* <Link activeClassName="active" className={"a"} to="" exact>
+            Contact us
+          </Link> */}
           <Link activeClassName="active" className={"a"} to="/cart" exact>
             Cart {cart.length > 0 && <span>{cart.length}</span>}
           </Link>

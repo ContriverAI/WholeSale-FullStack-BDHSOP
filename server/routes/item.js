@@ -37,14 +37,45 @@ router.post("/create-item", userAuth, async (req, res) => {
   }
 });
 
+router.get("/item/:itemId", async (req, res) => {
+  try {
+    const item = await itemModel
+      .findById(req.params.itemId)
+      .populate("clientID", {
+        accountVerifie: 1,
+        address: 1,
+        email: 1,
+        mobile: 1,
+        userName: 1,
+        state: 1,
+      });
+    if (!item) {
+      return res.send({
+        message: "Item doesn't exist.",
+        success: false,
+      });
+    }
+    return res.send({
+      item,
+      success: true,
+    });
+  } catch (err) {
+    return res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
+
 router.post("/update-status/:itemId", adminAuth, async (req, res) => {
   try {
+    console.log(req.body);
     const id = req.params.itemId;
     const existingItem = await itemModel.findById(id);
     const admin = await adminModel.findById(req.adminId);
-    if (!req.body.amount.trim() || !req.body.status.trim()) {
+    if (!req.body.amount.trim()) {
       return res.send({
-        message: "Please specify amount and status.",
+        message: "Please specify amount.",
         success: false,
       });
     }
@@ -62,6 +93,10 @@ router.post("/update-status/:itemId", adminAuth, async (req, res) => {
     }
     existingItem.status = req.body.status;
     existingItem.approvedBy = admin;
+    existingItem.deliveryCharges = req.body.deliveryCharges;
+    existingItem.shippingDays = req.body.shippingDays;
+    existingItem.deliveryDate = req.body.deliveryDate;
+
     if (req.body.status === "approved") existingItem.amount = req.body.amount;
     admin.approvedItems.unshift(id);
     await admin.save();

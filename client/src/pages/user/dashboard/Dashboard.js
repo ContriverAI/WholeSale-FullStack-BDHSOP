@@ -12,16 +12,16 @@ function Dashboard() {
     image: "",
     title: "",
     quantity: "",
-    shop: "",
-    category: "",
+    // shop: "",
+    // category: "",
     instruction: "",
-    labels: [],
+    // labels: [],
   });
 
-  const [Label, setLabel] = React.useState({
-    label: "",
-    value: "",
-  });
+  // const [Label, setLabel] = React.useState({
+  //   label: "",
+  //   value: "",
+  // });
   const uploadImage = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
@@ -43,6 +43,13 @@ function Dashboard() {
 
   const createNewProduct = async () => {
     try {
+      if (data.quantity < 5) {
+        addToast("Quantity should be 5 or more.", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+        return;
+      }
       const response = await createNewProductRequest(data);
       response.data.success
         ? addToast(response.data.message, {
@@ -59,10 +66,10 @@ function Dashboard() {
           image: "",
           title: "",
           quantity: "",
-          shop: "",
-          category: "",
+          // shop: "",
+          // category: "",
           instruction: "",
-          labels: [],
+          // labels: [],
         });
     } catch (err) {
       addToast(err.message, {
@@ -131,8 +138,8 @@ function Dashboard() {
                 Quantity
                 <input
                   type="number"
-                  min="1"
-                  placeholder="Quantity"
+                  min="5"
+                  placeholder="Min. 5 Quantity"
                   value={data.quantity}
                   onChange={(e) =>
                     setData({ ...data, quantity: e.target.value })
@@ -140,7 +147,7 @@ function Dashboard() {
                 />
               </label>
             </div>
-            <div className={Styles.RowHalf}>
+            {/* <div className={Styles.RowHalf}>
               <label>
                 Shop
                 <input
@@ -150,8 +157,8 @@ function Dashboard() {
                   onChange={(e) => setData({ ...data, shop: e.target.value })}
                 />
               </label>
-            </div>
-            <div className={Styles.RowHalf}>
+            </div> */}
+            {/* <div className={Styles.RowHalf}>
               <label>
                 Category
                 <input
@@ -163,7 +170,7 @@ function Dashboard() {
                   }
                 />
               </label>
-            </div>
+            </div> */}
             <div className={Styles.RowHalf}>
               <label>
                 Instruction
@@ -177,7 +184,7 @@ function Dashboard() {
                 />
               </label>
             </div>
-            <div className={Styles.RowHalf}>
+            {/* <div className={Styles.RowHalf}>
               <label>
                 Label
                 <input
@@ -189,8 +196,8 @@ function Dashboard() {
                   }
                 />
               </label>
-            </div>
-            <div className={Styles.RowHalf}>
+            </div> */}
+            {/* <div className={Styles.RowHalf}>
               <label>
                 Value
                 <input
@@ -202,8 +209,8 @@ function Dashboard() {
                   }
                 />
               </label>
-            </div>
-            <div className={Styles.RowFull}>
+            </div> */}
+            {/* <div className={Styles.RowFull}>
               <button
                 onClick={() => {
                   if (!Label.label || !Label.value) {
@@ -225,8 +232,8 @@ function Dashboard() {
               >
                 Add New Label
               </button>
-            </div>
-            {data.labels.length > 0 &&
+            </div> */}
+            {/* {data.labels.length > 0 &&
               data.labels.map((item, i) => (
                 <p label={i} className={Styles.Tags}>
                   {item.label}:{item.value}
@@ -245,7 +252,7 @@ function Dashboard() {
                     <i className="fa fa-times" aria-hidden="true"></i>
                   </span>
                 </p>
-              ))}
+              ))} */}
             <div className={Styles.RowFull}>
               <button style={{ width: "100%" }} onClick={createNewProduct}>
                 Make Request

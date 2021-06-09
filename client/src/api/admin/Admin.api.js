@@ -44,8 +44,7 @@ const updateItemStatus = async (data, id) => {
     method: "post",
     url: `${baseURL}/item/update-status/${id}`,
     headers: {
-      authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYWE1NDdmZTRkMDNkNmI4MDA4ZTk1OSIsImlhdCI6MTYyMTc4MTUwN30.zOsCgvELg-MEmjRNMVAbAPCZgMZPUm6H1S0CJejPizg",
+      authorization: `Bearer ${localStorage.getItem("BDshopAdmin")}`,
       "Content-Type": "application/json",
     },
     data: data,
@@ -54,4 +53,20 @@ const updateItemStatus = async (data, id) => {
   return await axios(config);
 };
 
-export { adminSignIn, adminSignUp, getPendingItems, updateItemStatus };
+const getItemById = async (id) => {
+  var config = {
+    method: "get",
+    url: `http://localhost:5000/api/item/item/${id}`,
+    headers: {},
+  };
+
+  return await axios(config);
+};
+
+export {
+  adminSignIn,
+  adminSignUp,
+  getPendingItems,
+  updateItemStatus,
+  getItemById,
+};

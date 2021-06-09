@@ -1,11 +1,12 @@
 @import "../../index.scss";
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 900px) {
   .Admin_Nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 16px;
     background-color: $primary;
+    height: 60px !important;
 
     .Logo {
       h1 {
@@ -46,7 +47,7 @@
     }
   }
 }
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 899px) {
   .Admin_Nav {
     background-color: $primary;
     position: relative;

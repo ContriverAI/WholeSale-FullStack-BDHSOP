@@ -5,9 +5,9 @@ const userSchema = new mongoose.Schema({
   userName: String,
   password: String,
   mobile: Number,
-  country: String,
+  // country: String,
   state: String,
-  pin: String,
+  // pin: String,
   accountVerified: {
     type: Boolean,
     default: false,

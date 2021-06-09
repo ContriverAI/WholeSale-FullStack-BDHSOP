@@ -39,6 +39,14 @@ function AdminNavigation() {
           >
             Home
           </Link>
+          <Link
+            activeClassName="active"
+            className={"a"}
+            to="/manage-order"
+            exact
+          >
+            Manage Orders
+          </Link>
           {/* <Link activeClassName="active" className={"a"} to="/home" exact>
             Contact us
           </Link>

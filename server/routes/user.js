@@ -54,7 +54,7 @@ router.post("/user-sign-in", async (req, res) => {
     }
     const userExist = await userModel.findOne(
       { email: req.body.email },
-      { userName: 1, email: 1, password: 1 }
+      { userName: 1, email: 1, password: 1, address: 1 }
     );
     if (!userExist) {
       return res.send({

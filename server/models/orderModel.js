@@ -13,9 +13,17 @@ const orderSchema = new mongoose.Schema({
   ],
   date: {
     type: Date,
-    default: Date.now(),
+    default: new Date(),
   },
   amount: Number,
+  deliveryAmount: Number,
+  deliveryDate: Date,
+  total: Number,
+  paymentImage: String,
+  paymentStatus: {
+    type: String,
+    default: "under verification",
+  },
   address: String,
   status: {
     type: String,

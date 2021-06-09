@@ -5,6 +5,49 @@ const router = express.Router();
 const userModel = require("../models/userModel");
 const orderModel = require("../models/orderModel");
 const userAuth = require("../middleware/userAuth");
+const itemModel = require("../models/itemModel");
+
+// getting user order
+router.get("/my-orders", userAuth, async (req, res) => {
+  try {
+    // const test = await orderModel
+    //   .find({ user: req.userId })
+    //   .populate("products");
+    // return res.send(test);
+    // console.log(test);
+    const user = await userModel
+      .findById(req.userId, { orders: 1 })
+      .populate("orders");
+    if (!user) {
+      return res.send({
+        message: "Something went wrong, please try again.",
+        success: false,
+      });
+    }
+    const records = await itemModel.find({
+      _id: { $in: user.orders[0].products },
+    });
+
+    Promise.all(
+      user.orders.map((item, i) => {
+        return itemModel.find({
+          _id: { $in: user.orders[i].products },
+        });
+      })
+    ).then((result) => res.send({ user, result, success: true }));
+    // // const items =
+    // return res.send({
+    //   // user,
+    //   // records2,
+    //   success: true,
+    // });
+  } catch (err) {
+    return res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
 
 // creating a new order
 
@@ -24,6 +67,38 @@ router.post("/new-order", userAuth, async (req, res) => {
     await user.save();
     return res.send({
       message: "Order created",
+      success: true,
+    });
+  } catch (err) {
+    return res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
+
+// updating payment screenshot
+router.post("/update-payment/:id", userAuth, async (req, res) => {
+  try {
+    const order = await orderModel.findById(req.params.id);
+    if (!order) {
+      return res.send({
+        message: "Order not found",
+        success: false,
+      });
+    }
+    console.log(order.user, req.userId);
+    if (order.user.toString() !== req.userId.toString()) {
+      return res.send({
+        message: "Unauthorized",
+        success: false,
+      });
+    }
+    order.paymentImage = req.body.payment;
+    order.paymentStatus = "payment submitted";
+    await order.save();
+    return res.send({
+      message: "Payment Updated",
       success: true,
     });
   } catch (err) {

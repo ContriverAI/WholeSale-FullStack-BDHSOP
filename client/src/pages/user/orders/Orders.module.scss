@@ -1,0 +1,165 @@
+@import "../../../index.scss";
+.Order_Container {
+  width: 100%;
+  padding: 1rem;
+  .Order {
+    width: 100%;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 12px;
+    display: flex;
+    .Left {
+      width: 60%;
+      button {
+        border: none;
+        color: $secondary;
+        background-color: $primary;
+        padding: 8px;
+        height: 32px;
+        border-radius: 4px;
+        line-height: 12px;
+        margin-bottom: 12px;
+      }
+      h1,
+      p {
+        color: $secondary;
+        margin-bottom: 8px;
+
+        span {
+          color: $primary;
+        }
+      }
+      .Payment {
+        width: 100%;
+        display: flex;
+        label {
+          width: 66%;
+          margin-right: 4%;
+          border: 1px solid $secondary;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          padding-left: 12px;
+          border-radius: 4px;
+          input {
+            display: none;
+          }
+        }
+        button {
+          border: none;
+          color: $secondary;
+          background-color: $primary;
+          padding: 8px;
+          height: 32px;
+          border-radius: 4px;
+          line-height: 12px;
+        }
+      }
+    }
+    .Right {
+      width: 40%;
+      .Items {
+        button {
+          width: 100%;
+          border: none;
+          background-color: $secondary;
+          color: $primary;
+          padding: 6px;
+        }
+        .ImgCtr {
+          width: 100%;
+          .Desc {
+            width: 100%;
+            display: flex;
+            padding: 8px;
+            .Details {
+              width: 75%;
+              padding-left: 12px;
+              .Row {
+                h4,
+                p {
+                  color: $secondary;
+                  font-weight: normal;
+                  span {
+                    color: $primary;
+                    margin-bottom: 8px;
+                  }
+                }
+              }
+            }
+            img {
+              width: 25%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .Order_Container {
+    width: 100%;
+    padding: 1rem;
+    .Order {
+      flex-direction: column;
+      .Left {
+        width: 100%;
+        padding: 6px;
+        h1 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+        h1,
+        p {
+          color: $secondary;
+          span {
+            color: $primary;
+          }
+        }
+      }
+      .Right {
+        width: 100%;
+        .Items {
+          button {
+            width: 100%;
+            border: none;
+            background-color: $secondary;
+            color: $primary;
+            padding: 6px;
+          }
+          .ImgCtr {
+            width: 100%;
+            .Desc {
+              width: 100%;
+              display: flex;
+              padding: 8px;
+              .Details {
+                width: 70%;
+                padding-left: 12px;
+                .Row {
+                  h4,
+                  p {
+                    color: $secondary;
+                    font-weight: normal;
+                    font-size: 12px;
+                    span {
+                      color: $primary;
+                      margin-bottom: 8px;
+                    }
+                  }
+                }
+              }
+              img {
+                width: 30%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
