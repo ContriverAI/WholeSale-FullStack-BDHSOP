@@ -87,7 +87,6 @@ router.post("/update-payment/:id", userAuth, async (req, res) => {
         success: false,
       });
     }
-    console.log(order.user, req.userId);
     if (order.user.toString() !== req.userId.toString()) {
       return res.send({
         message: "Unauthorized",
@@ -99,6 +98,30 @@ router.post("/update-payment/:id", userAuth, async (req, res) => {
     await order.save();
     return res.send({
       message: "Payment Updated",
+      success: true,
+    });
+  } catch (err) {
+    return res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
+
+router.post("/update-order/:id", userAuth, async (req, res) => {
+  try {
+    const order = await orderModel.findById(req.params.id);
+    if (!order) {
+      return res.send({
+        message: "Order not found",
+        success: false,
+      });
+    }
+    order.paymentStatus = req.body.paymentStatus;
+    order.status = req.body.status;
+    await order.save();
+    return res.send({
+      message: "Order Updated",
       success: true,
     });
   } catch (err) {

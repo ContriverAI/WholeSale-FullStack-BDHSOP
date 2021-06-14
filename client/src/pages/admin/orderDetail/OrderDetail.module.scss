@@ -1,0 +1,202 @@
+@import "../../../index.scss";
+.OrderDetail_Container {
+  width: 90%;
+  padding: 1rem;
+  // border: 1px solid red;
+  margin: 1rem auto;
+  display: flex;
+  .Left {
+    width: calc(50% - 24px);
+    margin: 12px;
+    .Product {
+      width: 100%;
+      display: flex;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+      padding: 1rem;
+      img {
+        width: calc(50% - 16px);
+        margin: 0px 8px;
+      }
+      .Desc {
+        width: 50%;
+        h1,
+        p {
+          font-size: 18px;
+          font-weight: 400;
+          color: $secondary;
+          margin-bottom: 8px;
+          span {
+            color: $primary;
+          }
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .Right {
+    width: calc(50% - 24px);
+    margin: 12px;
+    padding: 1rem;
+    height: fit-content;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    .OrdersDetails {
+      width: 100%;
+      h1 {
+        font-size: 24px;
+        color: $secondary;
+        margin-bottom: 8px;
+        span {
+          color: $primary;
+        }
+      }
+      h3,
+      p {
+        margin-bottom: 8px;
+        color: $secondary;
+
+        font-weight: 500;
+        span {
+          color: $primary;
+          font-weight: normal;
+        }
+      }
+    }
+    .Amounts {
+      width: 100%;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8px 0px;
+
+        .Total {
+          border-top: 1px solid $dark;
+          font-weight: 500;
+          margin-bottom: 8px;
+        }
+        tr {
+          td {
+            padding: 4px 0;
+            &:nth-child(2) {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+    .Delivery {
+      width: 100%;
+      margin-bottom: 8px;
+
+      h2 {
+        font-size: 18px;
+        color: $secondary;
+        margin-bottom: 8px;
+      }
+      h4,
+      h2,
+      p {
+        margin-bottom: 8px;
+        color: $secondary;
+        font-weight: 500;
+        span {
+          color: $primary;
+          font-weight: normal;
+        }
+      }
+    }
+    .Payment {
+      width: 100%;
+    }
+    .Input {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      select {
+        // margin-right: 12px;
+        width: calc(50% - 12px);
+        margin-bottom: 8px;
+        padding: 8px;
+        outline: none;
+        border: 2px solid $secondary;
+        // margin-right: 12px;
+        border-radius: 4px;
+        color: $primary;
+        min-width: 180px;
+        &::placeholder {
+          color: $primary;
+        }
+      }
+      button {
+        background-color: $secondary;
+        color: $primary;
+        border: none;
+        width: 100%;
+        padding: 6px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .OrderDetail_Container {
+    width: 100%;
+    padding: 1rem;
+    // border: 1px solid red;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    .Left {
+      width: calc(100% - 24px);
+    }
+    .Right {
+      width: calc(100% - 24px);
+      margin: 12px;
+      padding: 1rem;
+      height: fit-content;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      .OrdersDetails {
+        width: 100%;
+        h1 {
+          font-size: 18px;
+        }
+      }
+
+      .Input {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        select {
+          // margin-right: 12px;
+          width: calc(100%);
+          margin-bottom: 8px;
+          padding: 8px;
+          outline: none;
+          border: 2px solid $secondary;
+          // margin-right: 12px;
+          border-radius: 4px;
+          color: $primary;
+          min-width: 180px;
+          &::placeholder {
+            color: $primary;
+          }
+        }
+        button {
+          background-color: $secondary;
+          color: $primary;
+          border: none;
+          width: 100%;
+          padding: 6px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

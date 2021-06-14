@@ -87,6 +87,20 @@ const getOrderById = async (id) => {
   return await axios(config);
 };
 
+const UpdateOrder = async (data, id) => {
+  var config = {
+    method: "post",
+    url: `${baseURL}/order/update-order/${id}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopAdmin")}`,
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return await axios(config);
+};
+
 export {
   adminSignIn,
   adminSignUp,
@@ -95,4 +109,5 @@ export {
   getItemById,
   getOrder,
   getOrderById,
+  UpdateOrder,
 };

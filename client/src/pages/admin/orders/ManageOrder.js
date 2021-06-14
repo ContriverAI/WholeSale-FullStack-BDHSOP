@@ -57,6 +57,8 @@ function OrderTab({ title }) {
           return <p className="Payment_Verification">{x.paymentStatus}</p>;
         } else if (x.paymentStatus === "payment rejected") {
           return <p className="Payment_Rejected">{x.paymentStatus}</p>;
+        } else if (x.paymentStatus === "payment verified") {
+          return <p className="Payment_Verified">{x.paymentStatus}</p>;
         }
       },
     },
@@ -159,9 +161,7 @@ function ManageOrder() {
             <p>Rejected</p>
           </div>
         </div>
-        <div className={"main"} onClick={toggles}>
-          {tab[active]}
-        </div>
+        <div className={"main"}>{tab[active]}</div>
       </div>
     </Admin>
   );

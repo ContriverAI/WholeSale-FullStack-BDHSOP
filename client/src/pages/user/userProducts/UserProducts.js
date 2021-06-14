@@ -169,7 +169,9 @@ function UserProducts() {
       const resp = await getUsersProducts();
       console.log(resp.data.data.products);
       resp.data.success && setData(resp.data.data.products);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const Tabs = React.useRef(null);
