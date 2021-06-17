@@ -26,6 +26,7 @@ router.post("/create-item", userAuth, async (req, res) => {
     await newItem.save();
     await user.save();
     return res.send({
+      id: newItem._id,
       message: "Item created",
       success: true,
     });
@@ -37,7 +38,7 @@ router.post("/create-item", userAuth, async (req, res) => {
   }
 });
 
-router.get("/item/:itemId", async (req, res) => {
+router.get("/get-item/:itemId", async (req, res) => {
   try {
     const item = await itemModel
       .findById(req.params.itemId)
@@ -144,6 +145,39 @@ router.post("/delete-item/:id", userAuth, async (req, res) => {
     await user.save();
     await itemModel.findByIdAndDelete(id);
     return res.send({ message: "Item deleted", success: true });
+  } catch (err) {
+    res.send({
+      message: err.message,
+      success: false,
+    });
+  }
+});
+
+// updating quantity
+router.post("/update-quantity/:id", userAuth, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await userModel.findById(req.userId);
+    const existItem = await itemModel.findById(id);
+    if (!existItem) {
+      return res.send({
+        message: "Item doesn't exist.",
+        success: false,
+      });
+    }
+    if (user._id.toString() !== existItem.clientID.toString()) {
+      return res.send({ message: "Not Authorized", success: false });
+    }
+
+    if (!Boolean(user.products.find((item) => item.toString() === id))) {
+      return res
+        .status(404)
+        .send({ message: "Item Doesn't Exist", success: false });
+    }
+
+    existItem.quantity = req.body.qty;
+    await existItem.save();
+    return res.send({ message: "Quantity Updated", success: true });
   } catch (err) {
     res.send({
       message: err.message,

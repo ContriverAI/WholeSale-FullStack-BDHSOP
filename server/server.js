@@ -14,7 +14,7 @@ app.use(cors());
 
 // db connection and server ready
 mongoose
-  .connect("mongodb://localhost:27017/BDshop", {
+  .connect("mongodb://localhost:27017/BDshopDev", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,

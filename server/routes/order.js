@@ -119,6 +119,7 @@ router.post("/update-order/:id", userAuth, async (req, res) => {
     }
     order.paymentStatus = req.body.paymentStatus;
     order.status = req.body.status;
+    order.notes = req.body.notes;
     await order.save();
     return res.send({
       message: "Order Updated",

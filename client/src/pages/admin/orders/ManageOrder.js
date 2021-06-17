@@ -32,7 +32,7 @@ function OrderTab({ title }) {
         </Link>
       ),
     },
-    { title: "Order ID", field: "_id" },
+    { title: "Order ID", field: "orderID" },
     {
       title: "Order Date",
       field: "date",

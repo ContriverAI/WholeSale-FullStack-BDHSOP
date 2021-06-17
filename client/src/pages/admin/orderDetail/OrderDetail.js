@@ -13,6 +13,7 @@ function OrderDetail(props) {
   const [inputDetails, setInputDetails] = React.useState({
     paymentStatus: "",
     status: "",
+    notes: "",
   });
 
   const fetchData = async () => {
@@ -25,6 +26,7 @@ function OrderDetail(props) {
           ...inputDetails,
           status: resp.data.orders.status,
           paymentStatus: resp.data.orders.paymentStatus,
+          notes: resp?.data?.orders?.notes,
         });
       }
     } catch (err) {}
@@ -74,6 +76,12 @@ function OrderDetail(props) {
                   <p>
                     Quantity : <span>{item.quantity}</span>
                   </p>
+                  <p>
+                    Delivery Date :{" "}
+                    <span>
+                      {new Date(item?.deliveryDate).toLocaleDateString()}
+                    </span>
+                  </p>
                 </div>
               </div>
             ))}
@@ -81,7 +89,7 @@ function OrderDetail(props) {
         <div className={Styles.Right}>
           <div className={Styles.OrdersDetails}>
             <h1>
-              Order Id : <span>{data?._id}</span>
+              Order Id : <span>{data?.orderID}</span>
             </h1>
             <h1>
               Order Date :{" "}
@@ -129,6 +137,11 @@ function OrderDetail(props) {
             <h2>
               Payment status : <span>{data?.paymentStatus}</span>
             </h2>
+            {data?.notes && (
+              <h2>
+                Note : <span>{data?.notes}</span>
+              </h2>
+            )}
           </div>
           {data?.paymentImage && (
             <img className={Styles.Payment} src={data?.paymentImage} alt="" />
@@ -178,6 +191,16 @@ function OrderDetail(props) {
               <option value="payment verified">Payment Verified</option>
               <option value="payment rejected">Payment Rejected</option>
             </select>
+            <input
+              onChange={(e) =>
+                setInputDetails({
+                  ...inputDetails,
+                  notes: e.target.value,
+                })
+              }
+              value={inputDetails.notes}
+              placeholder="Notes"
+            />
             <button onClick={submitProductHandler}>Update</button>
           </div>
         </div>

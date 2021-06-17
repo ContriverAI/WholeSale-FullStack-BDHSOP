@@ -111,6 +111,24 @@ const updatePaymentScreenshot = async (payment, id) => {
   return await axios(config);
 };
 
+const updateQuantityBeforeOrder = async (id, qty) => {
+  var data = {
+    qty,
+  };
+
+  var config = {
+    method: "post",
+    url: `${baseURL}/item/update-quantity/${id}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("BDshopUser")}`,
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  return await axios(config);
+};
+
 export {
   userSignIn,
   userSignUp,
@@ -120,4 +138,5 @@ export {
   createNewOrder,
   getAllOrders,
   updatePaymentScreenshot,
+  updateQuantityBeforeOrder,
 };

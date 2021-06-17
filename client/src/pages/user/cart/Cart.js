@@ -1,10 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
-import { createNewOrder } from "../../../api/user/User.api";
+import {
+  createNewOrder,
+  updateQuantityBeforeOrder,
+} from "../../../api/user/User.api";
 import User from "../../User";
 import Styles from "./Cart.module.scss";
 import { useHistory } from "react-router-dom";
+import { FormatListNumberedRtlOutlined } from "@material-ui/icons";
 
 function Cart() {
   const history = useHistory();
@@ -12,6 +16,34 @@ function Cart() {
   const addresses = useSelector((state) => state.User.profile.address);
   const dispatch = useDispatch();
   const { addToast } = useToasts();
+  const [qty, setQty] = React.useState({});
+
+  const updateQty = async (id) => {
+    if (!qty[id] || qty[id] == 0) {
+      addToast("Enter valid quantity", {
+        appearance: "error",
+        autoDismiss: true,
+      });
+      return null;
+    }
+    try {
+      const resp = await updateQuantityBeforeOrder(id, qty[id]);
+      if (resp.data.success) {
+        addToast("Quantity updated.", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      }
+    } catch (e) {}
+    dispatch({
+      type: "UPDATE-QTY",
+      payload: {
+        id,
+        qty: qty[id],
+      },
+    });
+    setQty({});
+  };
 
   const newOrder = async () => {
     try {
@@ -19,7 +51,8 @@ function Cart() {
         products: carts.map((item) => item._id),
         amount: carts.reduce(
           (prevValue, currentValue) =>
-            prevValue + currentValue.amount * currentValue.quantity,
+            prevValue +
+            Number(currentValue.amount) * Number(currentValue.quantity),
           0
         ),
         deliveryAmount: carts.reduce(
@@ -31,7 +64,8 @@ function Cart() {
         total:
           carts.reduce(
             (prevValue, currentValue) =>
-              prevValue + currentValue.amount * currentValue.quantity,
+              prevValue +
+              Number(currentValue.amount) * Number(currentValue.quantity),
             0
           ) +
           carts.reduce(
@@ -40,6 +74,18 @@ function Cart() {
             0
           ),
       };
+      const qnty = carts.reduce(
+        (prevValue, currentValue) => prevValue + Number(currentValue.quantity),
+        0
+      );
+      if (qnty < 5) {
+        addToast("Quantity can not be less than 5", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+        return null;
+      }
+
       const response = await createNewOrder(data);
       console.log(response);
       if (response.data.success) {
@@ -74,6 +120,19 @@ function Cart() {
                     <p>
                       Quantity : <span>{item.quantity}</span>
                     </p>
+                    <div>
+                      <input
+                        name={item?._id}
+                        onChange={(e) =>
+                          setQty({ ...qty, [e.target.name]: e.target.value })
+                        }
+                        value={qty?._id}
+                        type="Number"
+                      />
+                      <button onClick={() => updateQty(item._id)}>
+                        UPDATE QUANTITY
+                      </button>
+                    </div>
                     <p>
                       Delivery Charges : <span>{item.deliveryCharges}</span>
                     </p>

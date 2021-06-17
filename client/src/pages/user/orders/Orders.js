@@ -118,6 +118,12 @@ function Order({ item, products, getOrders, i }) {
         <p>
           Payment Status: <span>{item?.paymentStatus}</span>
         </p>
+        {item?.notes && (
+          <p>
+            Admin's Note: <span>{item?.notes}</span>
+          </p>
+        )}
+
         {!item?.paymentImage ? (
           <>
             <div className={Styles.Payment}>

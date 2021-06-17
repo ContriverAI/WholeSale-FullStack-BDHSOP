@@ -29,11 +29,23 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: "created",
   },
+  notes: "",
+  orderID: "",
 });
 
 orderSchema.pre("save", function (next) {
   now = new Date();
   this.date = now;
+  var date = now;
+  var components = [
+    date.getFullYear().toString().slice(2, 4),
+    date.getMonth() + 1,
+    date.getDate(),
+    date.getHours(),
+    date.getMinutes(),
+  ];
+  var id = components.join("");
+  this.orderID = id;
   next();
 });
 

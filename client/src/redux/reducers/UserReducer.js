@@ -70,6 +70,25 @@ const UserReducer = (state = initState, action) => {
         ...state,
         cart: [],
       };
+    case "UPDATE-QTY":
+      localStorage.setItem(
+        "BDshopCart",
+        JSON.stringify(
+          state.cart.map((item) =>
+            item._id === action.payload.id
+              ? { ...item, quantity: action.payload.qty }
+              : item
+          )
+        )
+      );
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item._id === action.payload.id
+            ? { ...item, quantity: action.payload.qty }
+            : item
+        ),
+      };
     default:
       return state;
   }

@@ -115,7 +115,8 @@
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
-      select {
+      select,
+      input {
         // margin-right: 12px;
         width: calc(50% - 12px);
         margin-bottom: 8px;
@@ -129,6 +130,9 @@
         &::placeholder {
           color: $primary;
         }
+      }
+      input {
+        width: 100%;
       }
       button {
         background-color: $secondary;
