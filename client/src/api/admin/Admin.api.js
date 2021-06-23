@@ -56,7 +56,7 @@ const updateItemStatus = async (data, id) => {
 const getItemById = async (id) => {
   var config = {
     method: "get",
-    url: `${baseURL}/item/item/${id}`,
+    url: `${baseURL}/item/get-item/${id}`,
     headers: {},
   };
 
