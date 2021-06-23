@@ -76,12 +76,9 @@ function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
     case 2:
       return (
         <>
-          <label>
+          {/* <label>
             Country
             <div className={Styles.Input}>
-              {/* <span>
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-              </span> */}
               <input
                 placeholder="Country"
                 value={data.country}
@@ -89,7 +86,7 @@ function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
                 onChange={onInputChange}
               />
             </div>
-          </label>
+          </label> */}
           <label>
             State
             <div className={Styles.Input}>
@@ -104,12 +101,12 @@ function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
               />
             </div>
           </label>
-          <label>
+          {/* <label>
             PIN
             <div className={Styles.Input}>
-              {/* <span>
+              <span>
                 <i class="fa fa-user" aria-hidden="true"></i>
-              </span> */}
+              </span>
               <input
                 placeholder="Pincode"
                 value={data.pin}
@@ -117,7 +114,7 @@ function Stepper({ step, nextStep, prevStep, onInputChange, data, SignUp }) {
                 onChange={onInputChange}
               />
             </div>
-          </label>
+          </label> */}
 
           <label>
             Address
