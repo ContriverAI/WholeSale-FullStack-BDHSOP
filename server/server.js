@@ -13,8 +13,12 @@ app.use(express.json({ limit: "50mb" }));
 app.use(cors());
 
 // db connection and server ready
+const cloud =
+  "mongodb+srv://test:test@cluster0.277oe.mongodb.net/dev?retryWrites=true&w=majority";
+
+const local = "mongodb://localhost:27017/BDshop";
 mongoose
-  .connect("mongodb://localhost:27017/BDshopDev", {
+  .connect(cloud, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
